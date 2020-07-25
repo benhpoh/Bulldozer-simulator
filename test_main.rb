@@ -84,3 +84,41 @@ class RightTest < MiniTest::Test
     assert_equal(expected, actual)
   end
 end
+
+class HistoryTest < MiniTest::Test
+  def test_history_at_initialization
+    bulldozer = Bulldozer.new()
+    actual = bulldozer.history
+    expected = "No commands issued"
+    assert_equal(expected, actual)
+  end
+
+  def test_history_after_left
+    bulldozer = Bulldozer.new()
+    actual = bulldozer.history
+    expected = "Turn left"
+    assert_equal(expected, actual)
+  end
+
+  def test_history_after_left_twice
+    bulldozer = Bulldozer.new()
+    actual = bulldozer.history
+    expected = "Turn left, Turn left"
+    assert_equal(expected, actual)
+  end
+
+  def test_history_after_right
+    bulldozer = Bulldozer.new()
+    actual = bulldozer.history
+    expected = "Turn right"
+    assert_equal(expected, actual)
+  end
+
+  def test_history_after_right_twice
+    bulldozer = Bulldozer.new()
+    actual = bulldozer.history
+    expected = "Turn right, Turn right"
+    assert_equal(expected, actual)
+  end
+
+end
