@@ -95,6 +95,7 @@ class HistoryTest < MiniTest::Test
 
   def test_history_after_left
     bulldozer = Bulldozer.new()
+    bulldozer.left
     actual = bulldozer.history
     expected = "Turn left"
     assert_equal(expected, actual)
@@ -102,6 +103,7 @@ class HistoryTest < MiniTest::Test
 
   def test_history_after_left_twice
     bulldozer = Bulldozer.new()
+    2.times { bulldozer.left }
     actual = bulldozer.history
     expected = "Turn left, Turn left"
     assert_equal(expected, actual)
@@ -109,6 +111,7 @@ class HistoryTest < MiniTest::Test
 
   def test_history_after_right
     bulldozer = Bulldozer.new()
+    bulldozer.right
     actual = bulldozer.history
     expected = "Turn right"
     assert_equal(expected, actual)
@@ -116,6 +119,7 @@ class HistoryTest < MiniTest::Test
 
   def test_history_after_right_twice
     bulldozer = Bulldozer.new()
+    2.times { bulldozer.right }
     actual = bulldozer.history
     expected = "Turn right, Turn right"
     assert_equal(expected, actual)

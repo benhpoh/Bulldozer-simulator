@@ -12,12 +12,21 @@ class Bulldozer
   end
 
   def left()
+    @commands << "Turn left"
     direction = ["East", "North", "West", "South"]
     @facing = direction[direction.index(@facing) + 1] || "East"
   end
-
+  
   def right()
+    @commands << "Turn right"
     direction = ["East", "North", "West", "South"]
     @facing = direction[direction.index(@facing) - 1]
+  end
+
+  def history()
+    if @commands.empty?
+      return "No commands issued" 
+    end
+    @commands.join(", ")
   end
 end
