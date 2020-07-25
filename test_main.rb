@@ -12,8 +12,22 @@ class LocationTest < MiniTest::Test
     assert_equal(expected, actual)
   end
 
-  def test_location_after_advance_once_command
-    skip #assert_equal(expected, actual)
+  def test_location_after_advance_left
+    bulldozer = Bulldozer.new()
+    bulldozer.advance(1)
+    bulldozer.left
+    actual = bulldozer.location
+    expected = "X - 1; Y - 1; Facing - North"
+    assert_equal(expected, actual)
+  end
+
+  def test_location_after_advance_3_right
+    bulldozer = Bulldozer.new()
+    bulldozer.advance(3)
+    bulldozer.right
+    actual = bulldozer.location
+    expected = "X - 3; Y - 1; Facing - South"
+    assert_equal(expected, actual)
   end
 end
 
@@ -125,4 +139,22 @@ class HistoryTest < MiniTest::Test
     assert_equal(expected, actual)
   end
 
+  def test_history_after_advance
+    bulldozer = Bulldozer.new()
+    bulldozer.advance(1)
+    actual = bulldozer.history
+    expected = "Advance 1"
+    assert_equal(expected, actual)
+  end
+
+end
+
+class AdvanceTest < MiniTest::Test
+  def test_advance_without_argument
+    bulldozer = Bulldozer.new()
+    bulldozer.advance
+    actual = bulldozer.location
+    expected = "X - 1; Y - 1; Facing - East"
+    assert_equal(expected, actual)
+  end
 end

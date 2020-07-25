@@ -24,9 +24,16 @@ class Bulldozer
   end
 
   def history()
-    if @commands.empty?
-      return "No commands issued" 
-    end
+    return "No commands issued" if @commands.empty?
     @commands.join(", ")
+  end
+
+  def advance(distance=1)
+    @facing == "East" ? @position_x += distance : nil
+    @facing == "West" ? @position_x -= distance : nil
+    @facing == "North" ? @position_y -= distance : nil
+    @facing == "South" ? @position_y += distance : nil
+
+    @commands << "Advance #{distance}"
   end
 end
