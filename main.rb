@@ -1,0 +1,24 @@
+require_relative "lib/check_file"
+require_relative "bulldozer"
+
+check_file()
+puts "File check passed.\n "
+
+site_map = File.read(ARGV[0]).split
+site_map.map! { |row| row.split("") }
+
+puts "Welcome to the Aconex site clearing simulator. This is a map of the site:\n "
+
+puts site_map.map { |row| row.join(" ") }
+
+bulldozer = Bulldozer.new
+
+puts "The bulldozer is currently located at the Northern edge of the site, immediately to the West of the site, and facing East.\n "
+
+print "(l)eft, (r)ight, (a)dvance <n>, (q)uit: "
+command = STDIN.gets.chomp
+
+while command != "q"
+  print "(l)eft, (r)ight, (a)dvance <n>, (q)uit: "
+  command = STDIN.gets.chomp
+end

@@ -5,7 +5,7 @@
   - Build calculator to keep tabs on fuel and credits
 - Build functionality to read map.txt
   - Feed data into "advance" command to categorize simulation ending moves / add to fuel and credit costs
-- Build loop for CLI to receive commands
+- ~~Build loop for CLI to receive commands~~
 - Build quit command. Upon quitting output:
   - Simulation ended due to (user command / illegal command)
   - History
