@@ -1,5 +1,6 @@
 require_relative "lib/check_file"
 require_relative "lib/bulldozer"
+require_relative "lib/map"
 
 check_file()
 puts "File check passed.\n "

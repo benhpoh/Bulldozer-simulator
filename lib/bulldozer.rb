@@ -46,11 +46,14 @@ class Bulldozer
 
   def advance(distance=1)
     distance = distance.to_i
-    @facing == "East" ? @position_x += distance : nil
-    @facing == "West" ? @position_x -= distance : nil
-    @facing == "North" ? @position_y -= distance : nil
-    @facing == "South" ? @position_y += distance : nil
 
+    distance.times do
+      @facing == "East" ? @position_x += 1 : nil
+      @facing == "West" ? @position_x -= 1 : nil
+      @facing == "North" ? @position_y -= 1 : nil
+      @facing == "South" ? @position_y += 1 : nil
+    end
+    
     @commands << "Advance #{distance}"
   end
 end
