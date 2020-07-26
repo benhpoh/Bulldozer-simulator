@@ -93,6 +93,13 @@ class Can_Be_Cleared_Test < MiniTest::Test
     assert_equal(expected, actual)
   end
 
+  def test_cleared_land
+    map = Map.new [["-","o","o"]]
+    actual = map.can_be_cleared?(0,0)
+    expected = true
+    assert_equal(expected, actual)
+  end
+
   def test_outside_site
     map = Map.new [["o","o","o"]]
     actual = map.can_be_cleared?(0,3)

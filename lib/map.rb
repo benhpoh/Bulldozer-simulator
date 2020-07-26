@@ -1,4 +1,5 @@
 class Map
+  
   def initialize(map_array)
     @map_array = map_array
     @path_travelled = []
@@ -9,8 +10,11 @@ class Map
     if can_be_cleared?(x, y)
       @path_travelled << @map_array[y][x]
       @map_array[y][x] = "-"
+      @path_travelled.last
+      # Returns category of square that was cleared
     else
-      @map_array[y][x] # Returns illegal square being cleared
+      @map_array[y][x] == "T" ? "T" : "OUT"
+      # Returns category of illegal square being cleared
     end
   end
 
@@ -40,5 +44,9 @@ class Map
     # programming index starts at 0, 0
     # map positioning starts at 1, 1
     [x-1, y-1]
+  end
+
+  def display
+    @map_array.map { |row| row.join(" ") }
   end
 end
