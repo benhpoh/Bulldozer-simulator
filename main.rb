@@ -15,10 +15,14 @@ bulldozer = Bulldozer.new
 
 puts "The bulldozer is currently located at the Northern edge of the site, immediately to the West of the site, and facing East.\n "
 
-print "(l)eft, (r)ight, (a)dvance <n>, (q)uit: "
+print "(l)eft, (r)ight, (a)dvance <n>, (lo)cation, (q)uit: "
 command = STDIN.gets.chomp
 
 while command != "q"
-  print "(l)eft, (r)ight, (a)dvance <n>, (q)uit: "
+  response = bulldozer.execute(command)
+  if response == false
+    puts "Error. Invalid command."
+  end
+  print "(l)eft, (r)ight, (a)dvance <n>, (lo)cation, (q)uit: "
   command = STDIN.gets.chomp
 end

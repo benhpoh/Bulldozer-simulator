@@ -14,6 +14,7 @@
 ### Build log
 - Basic commands completed (left, right, advance, location, history)
 - CLI for program initiation complete. Next task: traversing the map vertically & horizontally
+- Execute command method completed. Manually tested, but how do I implement automated tests?
 
 ---
 
@@ -31,3 +32,9 @@ How should I traverse the map?
   - Map[i + x] to traverse East / West
   - Map[i + (y * num_of_cols)] to traverse North / South
   - *Harder to work out when bulldozer falls off*
+
+How to pass command inputs to bulldozer?
+- Commands are received as String through console
+- Can't directly do bulldozer.String
+- Bulldozer.command(String)
+- Add method to Bulldozer to parse String into commands

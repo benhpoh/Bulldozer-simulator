@@ -6,7 +6,24 @@ class Bulldozer
       @commands = []
   end
 
-  # instance method
+  def execute(command)
+    command = command.split(" ")
+
+    case command[0]
+    when "l"
+      left()
+    when "r"
+      right()
+    when "a"
+      advance(command[1] || 1)
+    when "lo"
+      puts location()
+    else
+      return false
+    end
+
+  end
+
   def location()
       "X - #{@position_x}; Y - #{@position_y}; Facing - #{@facing}"
   end
@@ -29,6 +46,7 @@ class Bulldozer
   end
 
   def advance(distance=1)
+    distance = distance.to_i
     @facing == "East" ? @position_x += distance : nil
     @facing == "West" ? @position_x -= distance : nil
     @facing == "North" ? @position_y -= distance : nil
