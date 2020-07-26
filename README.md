@@ -38,3 +38,4 @@ How to pass command inputs to bulldozer?
 - Can't directly do bulldozer.String
 - Bulldozer.command(String)
 - Add method to Bulldozer to parse String into commands
+- Error encountered with advance command. "a 4" is processed as a String. Need to convert "4".to_i

@@ -10,18 +10,17 @@ class Bulldozer
     command = command.split(" ")
 
     case command[0]
-    when "l"
-      left()
-    when "r"
-      right()
-    when "a"
-      advance(command[1] || 1)
-    when "lo"
-      puts location()
-    else
-      return false
+      when "l"
+        left()
+      when "r"
+        right()
+      when "a"
+        command[1].nil? ? advance(1) : advance(command[1])
+      when "lo"
+        puts location()
+      else
+        return false
     end
-
   end
 
   def location()
