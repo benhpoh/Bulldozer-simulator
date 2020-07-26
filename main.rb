@@ -1,5 +1,5 @@
 require_relative "lib/check_file"
-require_relative "bulldozer"
+require_relative "lib/bulldozer"
 
 check_file()
 puts "File check passed.\n "
