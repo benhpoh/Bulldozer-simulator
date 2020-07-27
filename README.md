@@ -1,5 +1,18 @@
 # Bulldozer-simulator
 
+## Assumption
+If a command results in the simulation ending (eg: advance 4 results in removal of protected tree / exiting site), the entire command is disregarded. Costs will be calculated up to the last valid command.
+
+
+### Build log
+- Basic commands completed (left, right, advance, location, history)
+- CLI for program initiation complete. Next task: traversing the map vertically & horizontally
+- Execute command method completed. Manually tested, but how do I implement automated tests?
+- Map class completed. Next task: integration with Bulldozer class
+- Built bulldozer.map method to display the current map
+- CLI interface completed. Next task: build calculator for credit
+---
+
 ## To Do List
 - ~~Build Bulldozer Class with necessary commands~~
   - Build calculator to keep tabs on fuel and credits
@@ -11,15 +24,6 @@
   - Simulation ended due to (user command / illegal command)
   - History
   - Costs
-
-### Build log
-- Basic commands completed (left, right, advance, location, history)
-- CLI for program initiation complete. Next task: traversing the map vertically & horizontally
-- Execute command method completed. Manually tested, but how do I implement automated tests?
-- Map class completed. Next task: integration with Bulldozer class
-- Built bulldozer.map method to display the current map
-- CLI interface completed. Next task: build calculator for credit
-
 ---
 
 ### Thinking out loud
@@ -48,3 +52,17 @@ How to check if stopping on tree or passing through tree?
 - Store path cleared in each advance command as a single array?
   - [o, o, t, r] => map to fuel costs => [1, 1, 2, 2]
   - [o, o, t, r] => if arr.index("t") != arr.length - 1, credit + 2
+
+Calculating costs
+- Communication overhead per command
+  - Done. Bulldozer has method to retrieve history of commands
+- Fuel
+  - Check path of each advance. Map to fuel cost
+- Uncleared square at end of simulation
+  - At end of simulation, calculate number of squares that aren't /[-T]/
+  - Add to cost
+- Destruction of protected tree
+  - Technically simulation is ended before that happens
+  - If Error Code shows "T", add 10 credits to final cost
+- Paint damange to clearable tree
+  - Check path of each advance
