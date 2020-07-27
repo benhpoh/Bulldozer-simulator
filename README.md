@@ -1,12 +1,51 @@
 # Bulldozer-simulator
 
+## Operations
+**Inputs**
+1. A file containing a site map. This will be specified on the command line when the
+application is started.
+2. Commands entered by the trainee on the console during the simulation run, as described
+below under "Operation".
+
+**Outputs**
+1. A list of all the commands that were entered by the trainee.
+2. A table providing itemized costs of the clearing operation and a total cost
+
+Program can be initiated by entering "ruby main.rb sample_map.txt"
+
+---
+
+**Rules**
+
+The site map is defined by a text file with one character per square of the site. Each row must have the same number of characters. Plain land is marked with the letter ‘o’, rocky land is marked with the letter ‘r’, removable trees are marked with the letter ‘t’, and trees that must be preserved are marked with the letter ‘T’. For example, the following describes a site that is 10 squares wide and 5 squares deep:
+```
+ootooooooo
+oooooooToo
+rrrooooToo
+rrrroooooo
+rrrrrtoooo
+```
+The initial position of the bulldozer will be outside of the site, to the left of the top left (north west) square of the site, facing towards the east. The bulldozer will never be blocked (by an unremovable tree) from entering the site by driving east.
+
+The available commands are:
+
+- **Advance**: this command takes a positive integer parameter to define the number of squares
+the bulldozer should move forwards (in whatever direction it is currently facing);
+- **Left**: turn the bulldozer (on the spot) 90 degrees to the left of the direction it is facing;
+- **Right**: turn the bulldozer 90 degrees to the right;
+- **Quit**: end the simulation.
+
+An attempt to move beyond the boundaries of the site will end the simulation even if there is
+uncleared land.
+
 ## Assumption
 If a command results in the simulation ending (eg: advance 4 results in removal of protected tree / exiting site), the entire command is disregarded. Costs will be calculated up to the last valid command.
 
 Penalty rate of 10 credits (destruction of protected tree) will still apply even though the command is disregarded.
 
+---
 
-### Build log
+# Build log
 - Basic commands completed (left, right, advance, location, history)
 - CLI for program initiation complete. Next task: traversing the map vertically & horizontally
 - Execute command method completed. Manually tested, but how do I implement automated tests?
@@ -31,7 +70,7 @@ Penalty rate of 10 credits (destruction of protected tree) will still apply even
 - Prettify Readme
 ---
 
-### Thinking out loud
+## Thinking out loud
 How should I traverse the map?
 - Option 1
   - 'Map' array containing \<x> subarrays for each row
