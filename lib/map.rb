@@ -14,6 +14,9 @@ class Map
       @path_travelled.last
       # Returns category of square that was cleared
     else
+      if @map_array[y].nil?
+        return "OUT"
+      end
       @map_array[y][x] == "T" ? "T" : "OUT"
       # Returns category of illegal square being cleared
     end
