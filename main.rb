@@ -17,12 +17,12 @@ bulldozer = Bulldozer.new(site_map)
 
 puts "\nThe bulldozer is currently located at the Northern edge of the site, immediately to the West of the site, and facing East.\n "
 
-print "(l)eft, (r)ight, (a)dvance <n>, (m)ap, (q)uit: "
-command = STDIN.gets.chomp
-
 simulation_active = true
 simulation_ended_because = nil
 protected_tree_damaged = 0
+
+print "(l)eft, (r)ight, (a)dvance <n>, (m)ap, (q)uit: "
+command = STDIN.gets.chomp
 
 while simulation_active
   response = bulldozer.execute(command)
@@ -44,12 +44,13 @@ while simulation_active
         print "(l)eft, (r)ight, (a)dvance <n>, (m)ap, (q)uit: "
         command = STDIN.gets.chomp
       end
-    else
+
+    else # No error. Loop for next command
       print "(l)eft, (r)ight, (a)dvance <n>, (m)ap, (q)uit: "
       command = STDIN.gets.chomp
   end
 
-end
+end # Simulation ended
 
 puts "\n"
 
@@ -65,13 +66,21 @@ puts "\n"
 
 overhead_quantity, fuel_quantity, uncleared_quantity, paint_damage = bulldozer.cost
 
+costs = {
+  overhead: 1,
+  fuel: 1,
+  uncleared: 3,
+  protected_tree: 10,
+  paint_damage: 2
+}
+
 output = [
   ["Item", "Quantity", "Cost"],
   ["Communication overhead", overhead_quantity, overhead_quantity * 1],
-  ["Fuel usage", fuel_quantity, fuel_quantity * 1],
-  ["Uncleared squares", uncleared_quantity, uncleared_quantity * 3],
-  ["Destruction of protected tree", protected_tree_damaged, protected_tree_damaged * 10],
-  ["Paint damage to bulldozer", paint_damage, paint_damage * 2],
+  ["Fuel usage", fuel_quantity, fuel_quantity * costs[:fuel]],
+  ["Uncleared squares", uncleared_quantity, uncleared_quantity * costs[:uncleared]],
+  ["Destruction of protected tree", protected_tree_damaged, protected_tree_damaged * costs[:protected_tree]],
+  ["Paint damage to bulldozer", paint_damage, paint_damage * costs[:paint_damage]],
 ]
 
 total_cost = 0

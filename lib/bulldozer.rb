@@ -26,7 +26,7 @@ class Bulldozer
       when "m"
         puts "\n"
         puts map()
-        puts "\n"
+        puts "\nBulldozer's current location:"
         puts location()
         puts "\n"
         [true, "Reference only"]
@@ -47,8 +47,8 @@ class Bulldozer
 
   def left()
     @commands << "Turn left"
-    direction = ["East", "North", "West", "South"]
-    @facing = direction[direction.index(@facing) + 1] || "East"
+    direction = ["South", "West", "North", "East"]
+    @facing = direction[direction.index(@facing) - 1]
   end
   
   def right()

@@ -3,22 +3,23 @@ class Map
   
   def initialize(map_array)
     @map_array = map_array
-    @path_travelled = []
   end
   
   def clear(x, y)
     x, y = convert_grid_to_index(x, y)
     if can_be_cleared?(x, y)
-      @path_travelled << @map_array[y][x]
+      square_cleared = @map_array[y][x]
       @map_array[y][x] = "-"
-      @path_travelled.last
-      # Returns category of square that was cleared
-    else
+
+      square_cleared
+      # Returns type of square that was cleared
+
+    else # Attempted to clear illegal square
       if @map_array[y].nil?
         return "OUT"
       end
       @map_array[y][x] == "T" ? "T" : "OUT"
-      # Returns category of illegal square being cleared
+      # Returns type of illegal square being cleared
     end
   end
 
