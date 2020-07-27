@@ -18,6 +18,7 @@
 - Execute command method completed. Manually tested, but how do I implement automated tests?
 - Map class completed. Next task: integration with Bulldozer class
 - Built bulldozer.map method to display the current map
+- CLI interface completed. Next task: build calculator for credit
 
 ---
 

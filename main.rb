@@ -15,7 +15,7 @@ puts site_map.map { |row| row.join(" ") }
 
 bulldozer = Bulldozer.new(site_map)
 
-puts "The bulldozer is currently located at the Northern edge of the site, immediately to the West of the site, and facing East.\n "
+puts "\nThe bulldozer is currently located at the Northern edge of the site, immediately to the West of the site, and facing East.\n "
 
 print "(l)eft, (r)ight, (a)dvance <n>, (m)ap, (q)uit: "
 command = STDIN.gets.chomp
@@ -34,15 +34,17 @@ while simulation_active
       when "OUT"
         simulation_active = false
         simulation_ended_because = "out"
+      when "QUIT"
+        simulation_active = false
+        simulation_ended_because = "user"
       else
         puts "Error, invalid command."
         print "(l)eft, (r)ight, (a)dvance <n>, (m)ap, (q)uit: "
         command = STDIN.gets.chomp
-    end
+      end
+    else
+      print "(l)eft, (r)ight, (a)dvance <n>, (m)ap, (q)uit: "
+      command = STDIN.gets.chomp
   end
 
-  if command == "q" # Simulation ended by user
-    simulation_active = false
-    simulation_ended_because = "user"
-  end
 end

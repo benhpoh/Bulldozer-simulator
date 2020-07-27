@@ -25,8 +25,11 @@ class Bulldozer
       when "m"
         puts map()
         puts location()
+        [true, "Reference only"]
+      when "q"
+        [false, "QUIT"]
       else
-        return [false, "Invalid command"]
+        [false, "Invalid command"]
     end
   end
 
