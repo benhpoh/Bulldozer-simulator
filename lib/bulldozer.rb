@@ -1,4 +1,5 @@
 require_relative "map"
+require_relative "costs"
 
 class Bulldozer
   attr_reader :commands, :routes
@@ -82,5 +83,10 @@ class Bulldozer
     @routes << path_travelled
 
     @commands << "Advance #{distance}"
+  end
+
+  def cost()
+    cost = Cost.new(@commands, @routes, @map.map_array)
+    cost.calculate_total
   end
 end

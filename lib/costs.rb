@@ -7,11 +7,11 @@ class Cost
     @final_map = final_map
   end
 
-  def overhead_cost()
+  def overhead_quantity()
     communication_units = @commands.length
   end
 
-  def fuel_cost()
+  def fuel_quantity()
     fuel_units = 0
 
     @routes.each do |route|
@@ -42,7 +42,7 @@ class Cost
     paint_damage_units
   end
 
-  def uncleared_cost()
+  def uncleared_quantity()
     uncleared_squares = 0
 
     @final_map.each do |row|
@@ -55,7 +55,7 @@ class Cost
     uncleared_squares
   end
 
-  def calculate_costs()
-    [overhead_cost, fuel_cost, uncleared_cost, paint_damage]
+  def calculate_total()
+    [overhead_quantity, fuel_quantity, uncleared_quantity, paint_damage]
   end
 end

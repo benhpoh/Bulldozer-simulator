@@ -3,6 +3,8 @@
 ## Assumption
 If a command results in the simulation ending (eg: advance 4 results in removal of protected tree / exiting site), the entire command is disregarded. Costs will be calculated up to the last valid command.
 
+Penalty rate of 10 credits (destruction of protected tree) will still apply even though the command is disregarded.
+
 
 ### Build log
 - Basic commands completed (left, right, advance, location, history)
@@ -12,19 +14,21 @@ If a command results in the simulation ending (eg: advance 4 results in removal 
 - Built bulldozer.map method to display the current map
 - CLI interface completed. Next task: build calculator for credit
 - Calculator completed for fuel & credit units
+- Output formatted for post simulation ending
 ---
 
 ## To Do List
 - ~~Build Bulldozer Class with necessary commands~~
   - ~~Build calculator to keep tabs on fuel and credits~~
-- Build functionality to read map.txt
+- ~~Build functionality to read map.txt~~
   - ~~Feed data into "advance" command to categorize simulation ending moves~~
   - ~~Determine if stopping on / passing through a removable tree for credit calculation purposes.~~
 - ~~Build loop for CLI to receive commands~~
-- Build quit command. Upon quitting output:
-  - Simulation ended due to (user command / illegal command)
-  - History
-  - Costs
+- ~~Build quit command. Upon quitting output:~~
+  - ~~Simulation ended due to (user command / illegal command)~~
+  - ~~History~~
+  - ~~Costs~~
+- Prettify Readme
 ---
 
 ### Thinking out loud
