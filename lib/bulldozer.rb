@@ -24,8 +24,11 @@ class Bulldozer
       when "a"
         command[1].nil? ? advance(1) : advance(command[1])
       when "m"
+        puts "\n"
         puts map()
+        puts "\n"
         puts location()
+        puts "\n"
         [true, "Reference only"]
       when "q"
         [false, "QUIT"]
