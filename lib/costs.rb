@@ -1,5 +1,5 @@
 class Cost
-  attr_reader :commands, :routes
+  # attr_reader :commands, :routes # Test purposes only
 
   def initialize(commands, routes, final_map)
     @commands = commands
@@ -31,15 +31,31 @@ class Cost
     paint_damage_units = 0
 
     @routes.each do |route|
-      # If route contains "t", calculate index of "t"s.
       # For each "t" that is not the last square, add 1 paint damage unit
       filtered_route = route.slice(0..-2) # discard last elem
-      paint_damaging_trees = filtered_route
+      num_of_damaging_trees = filtered_route
         .select { |square| square == "t" }
         .length
-      paint_damage_units += paint_damaging_trees
+      paint_damage_units += num_of_damaging_trees
     end
 
     paint_damage_units
+  end
+
+  def uncleared_cost()
+    uncleared_squares = 0
+
+    @final_map.each do |row|
+      # Count number of squares that are not "cleared" or "protected"
+      uncleared_squares += row
+        .reject { |square| square == "-" || square == "T" }
+        .length
+    end
+
+    uncleared_squares
+  end
+
+  def calculate_costs()
+    [overhead_cost, fuel_cost, uncleared_cost, paint_damage]
   end
 end

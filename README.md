@@ -11,14 +11,15 @@ If a command results in the simulation ending (eg: advance 4 results in removal 
 - Map class completed. Next task: integration with Bulldozer class
 - Built bulldozer.map method to display the current map
 - CLI interface completed. Next task: build calculator for credit
+- Calculator completed for fuel & credit units
 ---
 
 ## To Do List
 - ~~Build Bulldozer Class with necessary commands~~
-  - Build calculator to keep tabs on fuel and credits
+  - ~~Build calculator to keep tabs on fuel and credits~~
 - Build functionality to read map.txt
   - ~~Feed data into "advance" command to categorize simulation ending moves~~
-  - Determine if stopping on / passing through a removable tree for credit calculation purposes.
+  - ~~Determine if stopping on / passing through a removable tree for credit calculation purposes.~~
 - ~~Build loop for CLI to receive commands~~
 - Build quit command. Upon quitting output:
   - Simulation ended due to (user command / illegal command)
@@ -58,7 +59,7 @@ Calculating costs
   - Done. Bulldozer has method to retrieve history of commands
 - ~~Fuel~~
   - Check path of each advance. Map to fuel cost
-- Uncleared square at end of simulation
+- ~~Uncleared square at end of simulation~~
   - At end of simulation, calculate number of squares that aren't /[-T]/
   - Add to cost
 - Destruction of protected tree

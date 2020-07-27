@@ -6,6 +6,7 @@ Minitest::Reporters.use!(Minitest::Reporters::SpecReporter.new)
 
 class Init_Test < MiniTest::Test
   def test_read_commands
+    skip # Tests completed
     cost = Cost.new(["a 3", "r", "a 1"], nil, nil)
     actual = cost.commands
     expected = ["a 3", "r", "a 1"]
@@ -13,6 +14,7 @@ class Init_Test < MiniTest::Test
   end
 
   def test_read_routes
+    skip # Tests completed
     cost = Cost.new(nil, [["o","o","o"],["o"]], nil)
     actual = cost.routes
     expected = [["o","o","o"],["o"]]
@@ -108,4 +110,79 @@ class Paint_Damage_Test < MiniTest::Test
     expected = 2
     assert_equal(expected, actual)
   end
+end
+
+class Uncleared_Squares_Test < MiniTest::Test
+  def test_fully_cleared
+    cost = Cost.new(nil, nil, [["-","-","-"],["-","-","-"]])
+    actual = cost.uncleared_cost
+    expected = 0
+    assert_equal(expected, actual)
+  end
+  
+  def test_fully_cleared_with_protected_tree
+    cost = Cost.new(nil, nil, [["-","-","-"],["-","-","T"]])
+    actual = cost.uncleared_cost
+    expected = 0
+    assert_equal(expected, actual)
+  end
+
+  def test_partially_cleared_with_rocks
+    cost = Cost.new(nil, nil, [["-","-","-"],["-","r","T"]])
+    actual = cost.uncleared_cost
+    expected = 1
+    assert_equal(expected, actual)
+  end
+  
+  def test_partially_cleared_with_removable_tree
+    cost = Cost.new(nil, nil, [["-","-","-"],["-","t","T"]])
+    actual = cost.uncleared_cost
+    expected = 1
+    assert_equal(expected, actual)
+  end
+  
+  def test_partially_cleared_with_plains
+    cost = Cost.new(nil, nil, [["-","-","-"],["-","o","T"]])
+    actual = cost.uncleared_cost
+    expected = 1
+    assert_equal(expected, actual)
+  end
+  
+  def test_partially_cleared_with_variety
+    cost = Cost.new(nil, nil, [["-","-","t"],["r","o","T"]])
+    actual = cost.uncleared_cost
+    expected = 3
+    assert_equal(expected, actual)
+  end
+  
+  def test_uncleared
+    cost = Cost.new(nil, nil, [["o","o","T"],["r","o","t"]])
+    actual = cost.uncleared_cost
+    expected = 5
+    assert_equal(expected, actual)
+  end
+  
+end
+
+class Total_Cost_Test < MiniTest::Test
+  def test_overall_costs
+    cost = Cost.new(
+      ["a 3", "r", "a", "r", "a 2"], 
+      [["o","o","o"], ["o"], ["o","o"]], 
+      [["-","-","-"],["-","-","-"]])
+    actual = cost.calculate_costs
+    expected = [5, 6, 0, 0]
+    assert_equal(expected, actual)
+  end
+
+  def test_overall_costs_uncleared
+    cost = Cost.new(
+      ["a 3", "r", "a", "r", "a 1"], 
+      [["o","o","o"], ["o"], ["o"]], 
+      [["-","-","-"],["o","-","-"]])
+    actual = cost.calculate_costs
+    expected = [5, 5, 1, 0]
+    assert_equal(expected, actual)
+  end
+
 end

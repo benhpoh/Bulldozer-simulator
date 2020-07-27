@@ -173,7 +173,7 @@ class AdvanceTest < MiniTest::Test
     skip
   end
 
-  def test_advance_out_out_site
+  def test_advance_out_of_site
     skip
   end
 end
