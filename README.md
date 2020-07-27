@@ -54,7 +54,7 @@ How to check if stopping on tree or passing through tree?
   - [o, o, t, r] => if arr.index("t") != arr.length - 1, credit + 2
 
 Calculating costs
-- Communication overhead per command
+- ~~Communication overhead per command~~
   - Done. Bulldozer has method to retrieve history of commands
 - Fuel
   - Check path of each advance. Map to fuel cost
