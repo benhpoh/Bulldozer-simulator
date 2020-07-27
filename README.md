@@ -56,7 +56,7 @@ How to check if stopping on tree or passing through tree?
 Calculating costs
 - ~~Communication overhead per command~~
   - Done. Bulldozer has method to retrieve history of commands
-- Fuel
+- ~~Fuel~~
   - Check path of each advance. Map to fuel cost
 - Uncleared square at end of simulation
   - At end of simulation, calculate number of squares that aren't /[-T]/
@@ -64,5 +64,5 @@ Calculating costs
 - Destruction of protected tree
   - Technically simulation is ended before that happens
   - If Error Code shows "T", add 10 credits to final cost
-- Paint damange to clearable tree
+- ~~Paint damange to clearable tree~~
   - Check path of each advance

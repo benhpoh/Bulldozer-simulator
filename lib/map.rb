@@ -1,4 +1,5 @@
 class Map
+  attr_reader :map_array
   
   def initialize(map_array)
     @map_array = map_array
