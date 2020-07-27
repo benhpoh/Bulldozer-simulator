@@ -1,5 +1,7 @@
 # Bulldozer-simulator
-
+- [Assumptions](https://github.com/benhpoh/Bulldozer-simulator#assumption)
+- [Build Log](https://github.com/benhpoh/Bulldozer-simulator#build-log)
+- [Thought Process](https://github.com/benhpoh/Bulldozer-simulator#thinking-out-loud)
 ## Operations
 **Inputs**
 1. A file containing a site map. This will be specified on the command line when the
@@ -68,6 +70,7 @@ Penalty rate of 10 credits (destruction of protected tree) will still apply even
   - ~~History~~
   - ~~Costs~~
 - Prettify Readme
+  - There's always room for improvement when it comes to aesthetics...
 ---
 
 ## Thinking out loud
