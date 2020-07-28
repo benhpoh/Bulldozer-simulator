@@ -2,6 +2,7 @@
 - [Assumptions](https://github.com/benhpoh/Bulldozer-simulator#assumption)
 - [Build Log](https://github.com/benhpoh/Bulldozer-simulator#build-log)
 - [Thought Process](https://github.com/benhpoh/Bulldozer-simulator#thinking-out-loud)
+- [Test Driven Development](https://github.com/benhpoh/Bulldozer-simulator#tests)
 ## Operations
 **Inputs**
 1. A file containing a site map. This will be specified on the command line when the
@@ -45,6 +46,8 @@ If a command results in the simulation ending (eg: advance 4 results in removal 
 
 Penalty rate of 10 credits (destruction of protected tree) will still apply even though the command is disregarded.
 
+[Back to top](https://github.com/benhpoh/Bulldozer-simulator#bulldozer-simulator)
+
 ---
 
 # Build log
@@ -56,6 +59,9 @@ Penalty rate of 10 credits (destruction of protected tree) will still apply even
 - CLI interface completed. Next task: build calculator for credit
 - Calculator completed for fuel & credit units
 - Output formatted for post simulation ending
+
+[Back to top](https://github.com/benhpoh/Bulldozer-simulator#bulldozer-simulator)
+
 ---
 
 ## To Do List
@@ -113,3 +119,14 @@ Calculating costs
   - If Error Code shows "T", add 10 credits to final cost
 - ~~Paint damange to clearable tree~~
   - Check path of each advance
+
+---
+
+## Tests
+A series of tests were created to unit test each Class.
+
+Look in the "lib" folder to see the series of test cases for the Bulldozer, Map, and Cost classes.
+
+Tests were created for individual method calls, and combined method calls.
+
+[Back to top](https://github.com/benhpoh/Bulldozer-simulator#bulldozer-simulator)
