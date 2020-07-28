@@ -1,16 +1,16 @@
 require_relative "map"
-require_relative "costs"
+require_relative "cost"
 
 class Bulldozer
   attr_reader :commands, :routes
 
   def initialize(map_array)
-      @position_x = 0
-      @position_y = 1
-      @facing = "East"
-      @commands = []
-      @map = Map.new(map_array)
-      @routes = []
+    @position_x = 0
+    @position_y = 1
+    @facing = "East"
+    @commands = []
+    @map = Map.new(map_array)
+    @routes = []
   end
 
   def execute(command)
@@ -38,7 +38,7 @@ class Bulldozer
   end
 
   def location()
-      "X - #{@position_x}; Y - #{@position_y}; Facing - #{@facing}"
+    "X - #{@position_x}; Y - #{@position_y}; Facing - #{@facing}"
   end
 
   def map()
@@ -59,6 +59,7 @@ class Bulldozer
 
   def history()
     return "No commands issued" if @commands.empty?
+
     @commands.join(", ")
   end
 

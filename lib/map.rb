@@ -32,7 +32,7 @@ class Map
   end
 
   def is_protected_tree?(x, y)
-    @map_array[y][x] == "T" ? true : false
+    @map_array[y][x] == "T"
   end
 
   def is_outside_site?(x,y)

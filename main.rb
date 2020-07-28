@@ -43,11 +43,11 @@ while simulation_active
         puts "Error, invalid command."
         print "(l)eft, (r)ight, (a)dvance <n>, (m)ap, (q)uit: "
         command = STDIN.gets.chomp
-      end
+    end
 
-    else # No error. Loop for next command
-      print "(l)eft, (r)ight, (a)dvance <n>, (m)ap, (q)uit: "
-      command = STDIN.gets.chomp
+  else # No error. Loop for next command
+    print "(l)eft, (r)ight, (a)dvance <n>, (m)ap, (q)uit: "
+    command = STDIN.gets.chomp
   end
 
 end # Simulation ended
@@ -85,7 +85,8 @@ output = [
 
 total_cost = 0
 
-output.slice(1..-1) # Disregard header row
+output
+  .slice(1..-1) # Disregard header row
   .each { |line| total_cost += line[2] }
 
 # --------------------------------------

@@ -1,6 +1,6 @@
 require "minitest/autorun"
 require "minitest/reporters"
-require_relative "costs"
+require_relative "cost"
 
 Minitest::Reporters.use!(Minitest::Reporters::SpecReporter.new)
 
