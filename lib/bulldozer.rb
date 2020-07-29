@@ -14,16 +14,22 @@ class Bulldozer
   end
 
   def execute(command)
+    ###### once again can you abstract that further??
+    ## what's command[0] and command[1]?? just name some variables
     command = command.split(" ")
 
+    #### you could name better left() and right(). what is it? turn_left? handle_left? is_left?
     case command[0]
       when "l"
         left()
       when "r"
         right()
       when "a"
+        ## this is barely passing....
         command[1].nil? ? advance(1) : advance(command[1])
       when "m"
+        ### can you abstract line 33-38 to a function named:
+        # print_map()
         puts "\n"
         puts map()
         puts "\nBulldozer's current location:"
@@ -58,9 +64,14 @@ class Bulldozer
   end
 
   def history()
-    return "No commands issued" if @commands.empty?
+    return "No commands issued" if @commands.empty?  ######## I like this, mofo
 
     @commands.join(", ")
+  end
+  ##### I swapped cost and advance around, advance is more low level hence should be lower
+  def cost()
+    cost = Cost.new(@commands, @routes, @map.map_array)
+    cost.calculate_total
   end
 
   def advance(distance=1)
@@ -85,12 +96,6 @@ class Bulldozer
     end
 
     @routes << path_travelled
-
     @commands << "Advance #{distance}"
-  end
-
-  def cost()
-    cost = Cost.new(@commands, @routes, @map.map_array)
-    cost.calculate_total
   end
 end

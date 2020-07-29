@@ -6,7 +6,7 @@ check_file()
 puts "File check passed.\n "
 
 site_map = File.read(ARGV[0]).split
-site_map.map! { |row| row.split("") }
+site_map.map! { |row| row.split("") } ##### I WOULD HAVE A BANG HERE BUT MAKE ANOTHER VARIABLE INSTEAD ########
 
 puts "Welcome to the Aconex site clearing simulator. This is a map of the site:\n "
 
@@ -27,8 +27,13 @@ command = STDIN.gets.chomp
 while simulation_active
   response = bulldozer.execute(command)
 
-  if response[0] == false # Error raised
-    case response[1] # Error code
+  #### the two line below could be clearer => what is response[0] and what is response[1], can you name them ######
+  # now reading, i think you can better this section. a simple way would be name variable
+  has_error = response[0] == false
+  error_code = response[1]
+
+  if has_error
+    case error_code
       when "T"
         simulation_active = false
         protected_tree_damaged += 1
@@ -93,6 +98,8 @@ output
 
 puts "The costs for this land clearing operation were:\n "
 
+####### Can you wrapped this in a function and give it a name? #######
+# it feels like a punch in the face when you get to this line, it's too low level
 output.each do |line|
   puts line[0].ljust(34) + line[1].to_s.rjust(8) + line[2].to_s.rjust(8)
 end
