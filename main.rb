@@ -2,7 +2,7 @@ require_relative "lib/check_file"
 require_relative "lib/bulldozer"
 require_relative "lib/map"
 
-check_file()
+check_arguments()
 puts "File check passed.\n "
 
 site_map = File.read(ARGV[0]).split
