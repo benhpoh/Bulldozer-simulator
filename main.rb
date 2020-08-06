@@ -1,19 +1,18 @@
-require_relative "lib/check_file"
+require_relative "lib/check_input"
 require_relative "lib/bulldozer"
 require_relative "lib/map"
 
-check_arguments()
+CheckInput.new(ARGV)
 puts "File check passed.\n "
 
 site_map = File.read(ARGV[0]).split
 site_map.map! { |row| row.split("") }
+bulldozer = Bulldozer.new(site_map)
 
 puts "Welcome to the Aconex site clearing simulator. This is a map of the site:\n "
 
 puts site_map.map { |row| row.join(" ") }
 # Immutable map method for CLI display only
-
-bulldozer = Bulldozer.new(site_map)
 
 puts "\nThe bulldozer is currently located at the Northern edge of the site, immediately to the West of the site, and facing East.\n "
 

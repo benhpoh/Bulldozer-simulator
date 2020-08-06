@@ -7,7 +7,7 @@ class Bulldozer
   def initialize(map_array)
     @position_x = 0
     @position_y = 1
-    @facing = "East"
+    @facing = :East
     @commands = []
     @map = Map.new(map_array)
     @routes = []
@@ -24,12 +24,7 @@ class Bulldozer
       when "a"
         command[1].nil? ? advance(1) : advance(command[1])
       when "m"
-        puts "\n"
-        puts map()
-        puts "\nBulldozer's current location:"
-        puts location()
-        puts "\n"
-        [true, "Reference only"]
+        map()
       when "q"
         [false, "QUIT"]
       else
@@ -42,18 +37,24 @@ class Bulldozer
   end
 
   def map()
-    @map.display
+    puts "\n"
+    puts @map.display
+    puts "\nBulldozer's current location:"
+    puts location()
+    puts "\n"
+    
+    [true, "Reference only"]
   end
 
   def left()
     @commands << "Turn left"
-    direction = ["South", "West", "North", "East"]
+    direction = [:South, :West, :North, :East]
     @facing = direction[direction.index(@facing) - 1]
   end
   
   def right()
     @commands << "Turn right"
-    direction = ["East", "North", "West", "South"]
+    direction = [:East, :North, :West, :South]
     @facing = direction[direction.index(@facing) - 1]
   end
 
@@ -68,10 +69,10 @@ class Bulldozer
     distance = distance.to_i
 
     distance.times do
-      @facing == "East" ? @position_x += 1 : nil
-      @facing == "West" ? @position_x -= 1 : nil
-      @facing == "North" ? @position_y -= 1 : nil
-      @facing == "South" ? @position_y += 1 : nil
+      @facing == :East ? @position_x += 1 : nil
+      @facing == :West ? @position_x -= 1 : nil
+      @facing == :North ? @position_y -= 1 : nil
+      @facing == :South ? @position_y += 1 : nil
 
       square_cleared = @map.clear(@position_x, @position_y)
 

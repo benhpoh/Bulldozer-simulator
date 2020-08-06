@@ -15,20 +15,17 @@ class Map
       # Returns type of square that was cleared
 
     else # Attempted to clear illegal square
-      if @map_array[y].nil?
-        return "OUT"
-      end
+      return "OUT" if @map_array[y].nil?
+
       @map_array[y][x] == "T" ? "T" : "OUT"
       # Returns type of illegal square being cleared
     end
   end
 
   def can_be_cleared?(x, y)
-    if is_outside_site?(x, y) || is_protected_tree?(x, y)
-      false
-    else
-      true
-    end
+    return false if is_outside_site?(x, y) || is_protected_tree?(x, y)
+    
+    true
   end
 
   def is_protected_tree?(x, y)

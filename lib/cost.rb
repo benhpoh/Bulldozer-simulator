@@ -7,6 +7,10 @@ class Cost
     @final_map = final_map
   end
 
+  def calculate_total()
+    [overhead_quantity, fuel_quantity, uncleared_quantity, paint_damage]
+  end
+
   def overhead_quantity()
     communication_units = @commands.length
   end
@@ -53,9 +57,5 @@ class Cost
     end
 
     uncleared_squares
-  end
-
-  def calculate_total()
-    [overhead_quantity, fuel_quantity, uncleared_quantity, paint_damage]
   end
 end

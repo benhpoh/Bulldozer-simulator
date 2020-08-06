@@ -59,6 +59,7 @@ Penalty rate of 10 credits (destruction of protected tree) will still apply even
 - CLI interface completed. Next task: build calculator for credit
 - Calculator completed for fuel & credit units
 - Output formatted for post simulation ending
+- Updated argument checker method
 
 [Back to top](https://github.com/benhpoh/Bulldozer-simulator#bulldozer-simulator)
 
@@ -130,3 +131,38 @@ Look in the "lib" folder to see the series of test cases for the Bulldozer, Map,
 Tests were created for individual method calls, and combined method calls.
 
 [Back to top](https://github.com/benhpoh/Bulldozer-simulator#bulldozer-simulator)
+
+---
+
+## Further feedback
+- The site map consists of the input characters.
+  - To review
+  - Convert chars to Objects? plains = {display: "o", fuel_cost: 1, value: "Plains"}
+
+- The Map class exposes the core of its internal structure (2d array of characters), which makes it brittle. 
+  - Is this a problem? No external methods present that exposes the structure to modification.
+
+- There are examples in Map of conditionals directly returning booleans on both branches, suggesting the candidate lacks basic coding experience.
+  - Uncertain what this refers to. Booleans appear the right datatype to return based on conditions (eg. Is the square being cleared a protected tree / Is the bulldozer exiting the site)
+
+- There are no classes to represent the different types of land and their individual attributes and behaviours. This results in this knowledge being spread amongst other objects (Bulldozer and Cost), implemented with conditional logic based on characters from the site map.
+  - To review
+
+- There is a main file that contains an assortment of logic that should be part of other objects. It includes some simulation flow logic, cost calculation, and reporting.
+
+- There is a floating global method called ‘check_file()’. It doesn’t do what its name indicates anyway - it checks program arguments.
+  - Yes, and no. It checks the program argument to see if the specified file is of the right filetype.
+  - Reviewed, and refactored from a global method into a CheckInput class, which separates the two checks (right number of arguments, right filetype extension)
+
+- The command line processing is inside the Bulldozer. This is an avoidable complication for the Bulldozer. There is a missing abstraction for input command parsing.
+  - Agreed. To update and abstract command processing
+
+- Command processing in the Bulldozer returns loosely structured data from its command processing. It is attempting to indicate multiple different things so it returns an array instead of a scalar or more structured object. Sometimes it only returns an array by coincidence (e.g. a string), so the caller that indexes into the array seems to work by accident. There is no direct unit test of this code.
+  - Agreed. Returning an object seems a more appropriate strategy
+
+- The Bulldozer stores (and exposes) a list of commands in text form.
+
+- The Bulldozer has a method for reporting all costs - that seems like an odd responsibility for a bulldozer.
+
+- There is no class for the direction, leading to the Bulldozer having logic for direction changes. Directions are stored as strings causing unnecessary duplication and use of memory - even if you accepted that a text form for this was OK, a symbol (equivalent of an internalised string in Java) would be used idiomatic Ruby.
+  - Agreed. Swapping to symbols is an improvement
