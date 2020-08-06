@@ -121,6 +121,23 @@ Calculating costs
 - ~~Paint damange to clearable tree~~
   - Check path of each advance
 
+Should Map be a child of Bulldozer?
+- ~~No~~
+  - Bulldozer only needs to know L, R, A
+    - But how does it know if the A command is legal if Bulldozer doesn't know where it is positioned?
+    - Position class? What does the Position class abstract away from the Bulldozer?
+- Yes
+  - Bulldozer instance should have awareness of its environment
+  - Bulldozer.position returning the specific bulldozer instance's position is logical
+
+Should Bulldozer keep record of its route?
+- Map keeps record
+  - Logical because there's no need to pass each individual information from Map back to Bulldozer
+  - Upon simulation ending, pass through routes record, and final map data.
+- ~~Bulldozer keeps record~~
+  - Map being a child of Bulldozer means at some point it needs to pass the route information back up the chain for calculation
+  - Information only needs to be passed up at the end of Bulldozer's activities.
+
 ---
 
 ## Tests
