@@ -72,6 +72,6 @@ class Command
       ending_reason = "at your request"
     end
 
-    "The simulation has ended #{ending_reason}. These are the commands you issued:"
+    "\nThe simulation has ended #{ending_reason}. These are the commands you issued:\n "
   end
 end

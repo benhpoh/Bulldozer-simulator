@@ -1,4 +1,5 @@
 require_relative "lib/check_input"
+require_relative "lib/command"
 require_relative "lib/bulldozer"
 require_relative "lib/map"
 
@@ -7,56 +8,39 @@ puts "File check passed.\n "
 
 site_map = File.read(ARGV[0]).split
 site_map.map! { |row| row.split("") }
-bulldozer = Bulldozer.new(site_map)
+command = Command.new(site_map)
 
 puts "Welcome to the Aconex site clearing simulator. This is a map of the site:\n "
 
-puts site_map.map { |row| row.join(" ") }
-# Immutable map method for CLI display only
+puts site_map.map { |row| row.map(&:symbol).join(" ") }
 
 puts "\nThe bulldozer is currently located at the Northern edge of the site, immediately to the West of the site, and facing East.\n "
 
-simulation_active = true
 simulation_ended_because = nil
 protected_tree_damaged = 0
 
 print "(l)eft, (r)ight, (a)dvance <n>, (m)ap, (q)uit: "
-command = STDIN.gets.chomp
+input = STDIN.gets.chomp
 
-while simulation_active
-  response = bulldozer.execute(command)
+while command.simulation_active
+  response = command.execute(input)
 
-  if response[0] == false # Error raised
-    case response[1] # Error code
-      when "T"
-        simulation_active = false
-        protected_tree_damaged += 1
-        simulation_ended_because = "The simulation has ended due to an attempt to remove a protected tree. These are the commands you issued:"
-      when "OUT"
-        simulation_active = false
-        simulation_ended_because = "The simulation has ended due to an attempt to exit the site boundaries. These are the commands you issued:"
-      when "QUIT"
-        simulation_active = false
-        simulation_ended_because = "The simulation has ended at your request. These are the commands you issued:"
-      else
-        puts "Error, invalid command."
-        print "(l)eft, (r)ight, (a)dvance <n>, (m)ap, (q)uit: "
-        command = STDIN.gets.chomp
+  if response[:error_raised?] # Error raised
+    puts response[:error_description]
+
+    if response[:error_description] == "Error, invalid command."
+      print "(l)eft, (r)ight, (a)dvance <n>, (m)ap, (q)uit: "
+      input = STDIN.gets.chomp
     end
 
   else # No error. Loop for next command
     print "(l)eft, (r)ight, (a)dvance <n>, (m)ap, (q)uit: "
-    command = STDIN.gets.chomp
+    input = STDIN.gets.chomp
   end
 
 end # Simulation ended
 
-puts "\n"
-
-puts simulation_ended_because
-puts "\n"
-
-puts bulldozer.history
+puts command.commands_history.join(", ")
 puts "\n"
 
 # --------------------------------------#

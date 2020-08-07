@@ -63,6 +63,7 @@ Penalty rate of 10 credits (destruction of protected tree) will still apply even
 - Land-type class created to convert chars to Objects
 - Command parsing transferred from Bulldozer to Command class
 - Unit tests added for Command class
+- Control flow of Main updated till end of simulation stage
 
 [Back to top](https://github.com/benhpoh/Bulldozer-simulator#bulldozer-simulator)
 

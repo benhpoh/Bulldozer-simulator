@@ -95,7 +95,7 @@ class Response_Test < MiniTest::Test
     command = Command.new([["o","o","T"]])
     response = command.execute("a 3")
     actual = response[:error_description]
-    expected = "The simulation has ended due to an attempt to remove a protected tree. These are the commands you issued:"
+    expected = "\nThe simulation has ended due to an attempt to remove a protected tree. These are the commands you issued:\n "
     assert_equal(expected, actual)
   end
 
@@ -103,7 +103,7 @@ class Response_Test < MiniTest::Test
     command = Command.new([["o","o","o"]])
     response = command.execute("a 5")
     actual = response[:error_description]
-    expected = "The simulation has ended due to an attempt to exit the site boundaries. These are the commands you issued:"
+    expected = "\nThe simulation has ended due to an attempt to exit the site boundaries. These are the commands you issued:\n "
     assert_equal(expected, actual)
   end
 end
