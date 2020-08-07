@@ -65,6 +65,7 @@ Penalty rate of 10 credits (destruction of protected tree) will still apply even
 - Unit tests added for Command class
 - Control flow of Main updated till end of simulation stage
 - Cost class unit tests updated to reflect new Landtype class
+- Output class completed. Reporting sections from Main abstracted into Output
 
 [Back to top](https://github.com/benhpoh/Bulldozer-simulator#bulldozer-simulator)
 
@@ -83,9 +84,9 @@ Penalty rate of 10 credits (destruction of protected tree) will still apply even
   - ~~Costs~~
 - Prettify Readme
   - There's always room for improvement when it comes to aesthetics...
-- Output class to handle CLI display
-- Cost class to be amended to tie in with Output class instead of Bulldozer
-- Main file to only serve as control flow
+- ~~Output class to handle CLI display~~
+- ~~Cost class to be amended to tie in with Output class instead of Bulldozer~~
+- ~~Main file to only serve as control flow~~
 ---
 
 ## Thinking out loud
@@ -160,39 +161,39 @@ Tests were created for individual method calls, and combined method calls.
 ---
 
 ## Further feedback
-- ~~The site map consists of the input characters.~~
-  - Agreed. Chars converted to Land class at init phase.
+- The site map consists of the input characters.
+  - **Agreed**. Input chars now converted to Land class objects at init phase.
 
-- ~~The Map class exposes the core of its internal structure (2d array of characters), which makes it brittle.~~
-  - Is this a problem? No external methods present that exposes the structure to modification.
+- The Map class exposes the core of its internal structure (2d array of characters), which makes it brittle.
+  - Is this a problem? No external methods present that exposes the structure to modification. Nevertheless, elements are now stored as objects rather than primitives.
 
-- ~~There are examples in Map of conditionals directly returning booleans on both branches, suggesting the candidate lacks basic coding experience.~~
+- There are examples in Map of conditionals directly returning booleans on both branches, suggesting the candidate lacks basic coding experience.
   - Uncertain what this refers to. Booleans appear the right datatype to return based on conditions (eg. The square being cleared is a protected tree / The bulldozer is exiting the site => true / false)
 
-- ~~There are no classes to represent the different types of land and their individual attributes and behaviours. This results in this knowledge being spread amongst other objects (Bulldozer and Cost), implemented with conditional logic based on characters from the site map.~~
-  - Agreed. Created new Land class. String characters from the map.txt file gets converted into Land objects with data on how it should be displayed, if it's clearable, and cost to clear.
+- There are no classes to represent the different types of land and their individual attributes and behaviours. This results in this knowledge being spread amongst other objects (Bulldozer and Cost), implemented with conditional logic based on characters from the site map.
+  - **Agreed**. Created new Land class. String characters from the map.txt file gets converted into Land objects with data on how it should be displayed, if it's clearable, and cost to clear.
 
 - There is a main file that contains an assortment of logic that should be part of other objects. It includes some simulation flow logic, cost calculation, and reporting.
-  - To review creating an Output class
+  - **Agreed**. Stripped back most of the excess information, leaving only control flow.
 
-- ~~There is a floating global method called ‘check_file()’. It doesn’t do what its name indicates anyway - it checks program arguments.~~
+- There is a floating global method called ‘check_file()’. It doesn’t do what its name indicates anyway - it checks program arguments.
   - Yes, and no. It checks the program argument to see if the specified file is of the right filetype.
-  - Agreed regarding inappropriateness of global method. Refactored into a CheckInput class, which separates the two checks (right number of arguments, right filetype extension)
+  - **Agreed** regarding inappropriateness of global method. Refactored into a CheckInput class, which separates the two checks (right number of arguments, right filetype extension)
 
-- ~~The command line processing is inside the Bulldozer. This is an avoidable complication for the Bulldozer. There is a missing abstraction for input command parsing.~~
-  - Agreed. To update and abstract command processing
+- The command line processing is inside the Bulldozer. This is an avoidable complication for the Bulldozer. There is a missing abstraction for input command parsing.
+  - **Agreed**. To update and abstract command processing
   - Command class created to process inputs
 
-- ~~Command processing in the Bulldozer returns loosely structured data from its command processing. It is attempting to indicate multiple different things so it returns an array instead of a scalar or more structured object. Sometimes it only returns an array by coincidence (e.g. a string), so the caller that indexes into the array seems to work by accident. There is no direct unit test of this code.~~
-  - Agreed. Returning an object seems a more appropriate strategy
+- Command processing in the Bulldozer returns loosely structured data from its command processing. It is attempting to indicate multiple different things so it returns an array instead of a scalar or more structured object. Sometimes it only returns an array by coincidence (e.g. a string), so the caller that indexes into the array seems to work by accident. There is no direct unit test of this code.
+  - **Agreed**. Returning an object seems a more appropriate strategy
   - Unit testing established for Command class.
 
-- ~~The Bulldozer stores (and exposes) a list of commands in text form.~~
+- The Bulldozer stores (and exposes) a list of commands in text form.
   - Is this a problem? Command class still stores commands in String / text form to maintain consistency with STDINPUT
 
 - The Bulldozer has a method for reporting all costs - that seems like an odd responsibility for a bulldozer.
-  - Agreed. to be Abstracted into a separate class' method
+  - **Agreed**. Abstracted into the output class method for reporting
 
-- ~~There is no class for the direction, leading to the Bulldozer having logic for direction changes. Directions are stored as strings causing unnecessary duplication and use of memory - even if you accepted that a text form for this was OK, a symbol (equivalent of an internalised string in Java) would be used idiomatic Ruby.~~
-  - Agreed. Swapping to symbols is an improvement.
+- There is no class for the direction, leading to the Bulldozer having logic for direction changes. Directions are stored as strings causing unnecessary duplication and use of memory - even if you accepted that a text form for this was OK, a symbol (equivalent of an internalised string in Java) would be used idiomatic Ruby.
+  - **Agreed**. Swapping to symbols is an improvement.
   - At this scale, abstracting directions to a seperate class feels over engineered. In this instance, ease of readibility outweighs performance benefits in my view.

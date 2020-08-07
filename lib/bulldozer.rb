@@ -59,16 +59,10 @@ class Bulldozer
     end
 
     @map.log_route(path_travelled)
-
     {advance_successful: true}
   end
 
   def shutdown
     {routes: @map.routes, end_map: @map.map_array}
-  end
-
-  def cost()
-    cost = Cost.new(@commands, @routes, @map.map_array)
-    cost.calculate_total
   end
 end

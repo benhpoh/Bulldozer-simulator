@@ -15,7 +15,7 @@ class Command
       error_raised?: false,
       error_description: nil
     }
-    return @response if !@simulation_active
+    return @response unless @simulation_active
 
     command, advance_steps = input.split(" ")
 
@@ -38,10 +38,10 @@ class Command
 
     when "q"
       @simulation_active = false
+      shutdown()
       @response[:error_description] = parse_error(:Q)
 
     else
-      @response[:error_raised?] = true
       @response[:error_description] = parse_error(:INV)
     end
 
@@ -56,12 +56,14 @@ class Command
 
     if adv_response[:advance_successful] == false
       @simulation_active = false
-      @response[:error_raised?] = true
+      shutdown()
       @response[:error_description] = parse_error(adv_response[:error_code])
     end
   end
-
+  
   def parse_error(error_code)
+    @response[:error_raised?] = true
+
     if error_code == :INV
       return "Error, invalid command."
     elsif error_code == :T
@@ -73,5 +75,11 @@ class Command
     end
 
     "\nThe simulation has ended #{ending_reason}. These are the commands you issued:\n "
+  end
+
+  def shutdown
+    shutdown_data = @bulldozer.shutdown()
+    shutdown_data[:commands] = @commands_history
+    @response[:shutdown_data] = shutdown_data
   end
 end
