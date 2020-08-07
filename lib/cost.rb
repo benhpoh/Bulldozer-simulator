@@ -12,7 +12,7 @@ class Cost
   end
 
   def overhead_quantity()
-    communication_units = @commands.length
+    @commands.length
   end
 
   def fuel_quantity()
@@ -20,11 +20,7 @@ class Cost
 
     @routes.each do |route|
       route.each do |square|
-        if square == "t" || square == "r"
-          fuel_units += 2
-        else
-          fuel_units += 1
-        end
+        fuel_units += square.cost
       end
     end
 
@@ -38,7 +34,7 @@ class Cost
       # For each "t" that is not the last square, add 1 paint damage unit
       filtered_route = route.slice(0..-2) # discard last elem
       num_of_damaging_trees = filtered_route
-        .select { |square| square == "t" }
+        .select { |square| square.type == :RemovableTree }
         .length
       paint_damage_units += num_of_damaging_trees
     end
@@ -52,7 +48,7 @@ class Cost
     @final_map.each do |row|
       # Count number of squares that are not "cleared" or "protected"
       uncleared_squares += row
-        .reject { |square| square == "-" || square == "T" }
+        .reject { |square| square.type == :Cleared || square.type == :ProtectedTree}
         .length
     end
 
