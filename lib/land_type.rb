@@ -50,8 +50,8 @@ class Land
     @land[:type]
   end
 
-  def clearable
-    @land[:clearable]
+  def clearable?
+    @land[:clearable] == true
   end
 
   def cost

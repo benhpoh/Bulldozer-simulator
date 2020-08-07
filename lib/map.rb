@@ -25,7 +25,7 @@ class Map
   end
 
   def can_be_cleared?(x, y)
-    within_site?(x, y) && @map_array[y][x][:clearable]
+    within_site?(x, y) && @map_array[y][x].clearable?
   end
 
   def within_site?(x,y)
