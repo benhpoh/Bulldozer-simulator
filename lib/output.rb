@@ -14,10 +14,10 @@ class Output
     }
   end
 
-  def welcome
+  def self.welcome(map)
     puts "Welcome to the Aconex site clearing simulator. This is a map of the site:\n "
 
-    puts @end_map.map { |row| row.map(&:symbol).join(" ") }
+    puts map.map { |row| row.map(&:symbol).join(" ") }
 
     puts "\nThe bulldozer is currently located at the Northern edge of the site, immediately to the West of the site, and facing East.\n "
   end

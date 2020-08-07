@@ -1,5 +1,4 @@
 require_relative "map"
-require_relative "cost"
 
 class Bulldozer
 

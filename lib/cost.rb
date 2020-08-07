@@ -1,6 +1,4 @@
 class Cost
-  # attr_reader :commands, :routes # Test purposes only
-
   def initialize(commands, routes, final_map)
     @commands = commands
     @routes = routes

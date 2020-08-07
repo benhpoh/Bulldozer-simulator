@@ -2,12 +2,15 @@ class CheckInput
   def initialize(input)
     check_input(input)
   end
+  
+  private
 
   def check_input(input)
     check_arguments_length(input)
     check_file_type(input)
+    puts "Filetype check passed.\n "
   end
-  
+
   def check_file_type(input)
     if input[0].slice(-4..-1) != ".txt"
       puts "Invalid file format. Expecting '.txt'"

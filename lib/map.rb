@@ -25,6 +25,19 @@ class Map
     end
   end
 
+  def display
+    @map_array.map do |row|
+      row.map { |land| land.symbol }
+        .join(" ")
+    end
+  end
+
+  def log_route(route_section)
+    @routes << route_section
+  end
+
+  private
+
   def can_be_cleared?(x, y)
     within_site?(x, y) && @map_array[y][x].clearable?
   end
@@ -40,17 +53,6 @@ class Map
     # programming index starts at 0, 0
     # map positioning starts at 1, 1
     [x-1, y-1]
-  end
-
-  def display
-    @map_array.map do |row|
-      row.map { |land| land.symbol }
-        .join(" ")
-    end
-  end
-
-  def log_route(route_section)
-    @routes << route_section
   end
 
   def convert_txt_map(string_2d_array)
