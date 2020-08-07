@@ -16,7 +16,7 @@ class Command
       error_description: nil
     }
     return @response if !@simulation_active
-    
+
     command, advance_steps = input.split(" ")
 
     case command
@@ -38,11 +38,11 @@ class Command
 
     when "q"
       @simulation_active = false
-      @response[:error_description] = parse_error("Q")
+      @response[:error_description] = parse_error(:Q)
 
     else
       @response[:error_raised?] = true
-      @response[:error_description] = parse_error("INV")
+      @response[:error_description] = parse_error(:INV)
     end
 
     @response
@@ -52,23 +52,23 @@ class Command
   private
 
   def advance(advance_steps)
-    response = @bulldozer.advance(advance_steps)
+    adv_response = @bulldozer.advance(advance_steps)
 
-    if response[:advance_successful] == false
+    if adv_response[:advance_successful] == false
       @simulation_active = false
       @response[:error_raised?] = true
-      @response[:error_description] = parse_error(response[:error_code])
+      @response[:error_description] = parse_error(adv_response[:error_code])
     end
   end
 
   def parse_error(error_code)
-    if error_code == "INV"
+    if error_code == :INV
       return "Error, invalid command."
-    elsif error_code == "T"
+    elsif error_code == :T
       ending_reason = "due to an attempt to remove a protected tree"
-    elsif error_code == "OUT"
+    elsif error_code == :OUT
       ending_reason = "due to an attempt to exit the site boundaries"
-    elsif error_code == "Q"
+    elsif error_code == :Q
       ending_reason = "at your request"
     end
 

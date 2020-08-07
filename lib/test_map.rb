@@ -84,4 +84,3 @@ class Can_Be_Cleared_Test < MiniTest::Test
     assert_equal(expected, actual)
   end
 end
-

@@ -2,35 +2,13 @@ require_relative "map"
 require_relative "cost"
 
 class Bulldozer
-  attr_reader :commands, :routes
 
   def initialize(map_array)
     @position_x = 0
     @position_y = 1
     @facing = :East
-    # @commands = []
     @map = Map.new(map_array)
-    @routes = []
   end
-
-  # def execute(command)
-  #   command = command.split(" ")
-
-  #   case command[0]
-  #     when "l"
-  #       left()
-  #     when "r"
-  #       right()
-  #     when "a"
-  #       command[1].nil? ? advance(1) : advance(command[1])
-  #     when "m"
-  #       map()
-  #     when "q"
-  #       [false, "QUIT"]
-  #     else
-  #       [false, "Invalid command"]
-  #   end
-  # end
 
   def location()
     "X - #{@position_x}; Y - #{@position_y}; Facing - #{@facing}"
@@ -59,12 +37,6 @@ class Bulldozer
     @facing = direction[direction.index(@facing) - 1]
   end
 
-  # def history()
-  #   return "No commands issued" if @commands.empty?
-
-  #   @commands.join(", ")
-  # end
-
   def advance(distance)
     path_travelled = []
     distance = distance.to_i
@@ -77,17 +49,22 @@ class Bulldozer
 
       square_cleared = @map.clear(@position_x, @position_y)
 
-      if square_cleared == "T" || square_cleared == "OUT"
-        @routes << path_travelled
-        return {advance_successful: false, error_code: square_cleared}
-      else
+      if square_cleared.clearable?
         path_travelled << square_cleared
+      else
+        @map.log_route(path_travelled)
+        return {advance_successful: false, error_code: square_cleared.symbol}
       end
+
     end
 
-    @routes << path_travelled
+    @map.log_route(path_travelled)
 
     {advance_successful: true}
+  end
+
+  def shutdown
+    {routes: @map.routes, end_map: @map.map_array}
   end
 
   def cost()

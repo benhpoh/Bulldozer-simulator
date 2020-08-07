@@ -1,10 +1,11 @@
 require_relative "land_type"
 
 class Map
-  attr_reader :map_array
+  attr_reader :map_array, :routes
 
   def initialize(map_array)
     @map_array = convert_txt_map(map_array)
+    @routes = []
   end
   
   def clear(x, y)
@@ -34,20 +35,6 @@ class Map
     y >= 0 &&
     y < @map_array.length
   end
-  
-  # def is_protected_tree?(x, y)
-  #   @map_array[y][x] == "T"
-  # end
-
-  # def is_outside_site?(x,y)
-  #   if x < 0 || x >= @map_array[0].length
-  #     true
-  #   elsif y < 0 || y >= @map_array.length
-  #     true
-  #   else
-  #     false
-  #   end
-  # end
 
   def convert_grid_to_index(x, y)
     # programming index starts at 0, 0
@@ -56,10 +43,14 @@ class Map
   end
 
   def display
-    @map_array.map do |row| 
-      row.map { |land| land[:symbol] }
-        .join(" ") 
+    @map_array.map do |row|
+      row.map { |land| land.symbol }
+        .join(" ")
     end
+  end
+
+  def log_route(route_section)
+    @routes << route_section
   end
 
   def convert_txt_map(string_2d_array)

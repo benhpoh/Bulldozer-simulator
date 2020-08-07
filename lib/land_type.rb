@@ -32,7 +32,7 @@ class Land
         clearable: true
       },
       "out" => {
-        symbol: nil,
+        symbol: :OUT,
         type: :OffSite,
         fuel_cost: nil,
         clearable: false
