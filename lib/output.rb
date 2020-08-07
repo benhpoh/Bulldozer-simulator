@@ -5,13 +5,6 @@ class Output
     @commands = commands
     @routes = routes
     @end_map = end_map
-    @unit_cost = {
-      overhead: 1,
-      fuel: 1,
-      uncleared: 3,
-      protected_tree: 10,
-      paint_damage: 2
-    }
   end
 
   def self.welcome(map)
@@ -49,34 +42,33 @@ class Output
   private
 
   def summarize_cost
-    cost = Cost.new(@commands, @routes, @end_map)
-    overhead_quantity, fuel_quantity, uncleared_quantity, paint_damage = cost.calculate_total
+    cost = Cost.new(@commands, @routes, @end_map).calculate_total
 
     table_data = [
       {
         item: "Communication overhead",
-        quantity: overhead_quantity,
-        cost: overhead_quantity * @unit_cost[:overhead]
+        quantity: cost[:overhead_quantity],
+        cost: cost[:overhead_cost]
       },
       {
         item: "Fuel usage",
-        quantity: fuel_quantity,
-        cost: fuel_quantity * @unit_cost[:fuel]
+        quantity: cost[:fuel_quantity],
+        cost: cost[:fuel_cost]
       },
       {
         item: "Uncleared squares",
-        quantity: uncleared_quantity,
-        cost: uncleared_quantity * @unit_cost[:uncleared]
+        quantity: cost[:uncleared_quantity],
+        cost: cost[:uncleared_cost]
       },
       {
         item: "Destruction of protected tree",
         quantity: 0,
-        cost: 0 * @unit_cost[:protected_tree]
+        cost: 0
       },
       {
         item: "Paint damage to bulldozer",
-        quantity: paint_damage,
-        cost: paint_damage * @unit_cost[:paint_damage]
+        quantity: cost[:paint_damage],
+        cost: cost[:paint_damage_cost]
       }
     ]
 

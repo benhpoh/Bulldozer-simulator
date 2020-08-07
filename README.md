@@ -66,6 +66,7 @@ Penalty rate of 10 credits (destruction of protected tree) will still apply even
 - Control flow of Main updated till end of simulation stage
 - Cost class unit tests updated to reflect new Landtype class
 - Output class completed. Reporting sections from Main abstracted into Output
+- Fixed mistake where portions of cost calculation remained in Output class
 
 [Back to top](https://github.com/benhpoh/Bulldozer-simulator#bulldozer-simulator)
 

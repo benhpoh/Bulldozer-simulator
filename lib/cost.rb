@@ -3,10 +3,26 @@ class Cost
     @commands = commands
     @routes = routes
     @final_map = final_map
+    @unit_cost = {
+      overhead: 1,
+      fuel: 1,
+      uncleared: 3,
+      protected_tree: 10,
+      paint_damage: 2
+    }
   end
 
   def calculate_total()
-    [overhead_quantity, fuel_quantity, uncleared_quantity, paint_damage]
+    {
+      overhead_quantity: overhead_quantity(),
+      overhead_cost: overhead_quantity() * @unit_cost[:overhead],
+      fuel_quantity: fuel_quantity(),
+      fuel_cost: fuel_quantity() * @unit_cost[:fuel],
+      uncleared_quantity: uncleared_quantity(),
+      uncleared_cost: uncleared_quantity() * @unit_cost[:uncleared],
+      paint_damage: paint_damage(),
+      paint_damage_cost: paint_damage() * @unit_cost[:paint_damage]
+    }
   end
 
   def overhead_quantity()
