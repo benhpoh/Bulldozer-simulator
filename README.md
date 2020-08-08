@@ -65,8 +65,10 @@ Penalty rate of 10 credits (destruction of protected tree) will still apply even
 - Unit tests added for Command class
 - Control flow of Main updated till end of simulation stage
 - Cost class unit tests updated to reflect new Landtype class
-- Output class completed. Reporting sections from Main abstracted into Output
-- Fixed mistake where portions of cost calculation remained in Output class
+- Report class completed. Reporting sections from Main abstracted into Report
+- Fixed mistake where portions of cost calculation remained in Report class
+- Renamed Output class to Report for better specificity.
+- Renamed CheckInput class to InputValidator to conform to naming conventions (nouns over verbs)
 
 [Back to top](https://github.com/benhpoh/Bulldozer-simulator#bulldozer-simulator)
 
@@ -85,8 +87,8 @@ Penalty rate of 10 credits (destruction of protected tree) will still apply even
   - ~~Costs~~
 - Prettify Readme
   - There's always room for improvement when it comes to aesthetics...
-- ~~Output class to handle CLI display~~
-- ~~Cost class to be amended to tie in with Output class instead of Bulldozer~~
+- ~~Report class to handle CLI display~~
+- ~~Cost class to be amended to tie in with Report class instead of Bulldozer~~
 - ~~Main file to only serve as control flow~~
 ---
 
@@ -179,7 +181,7 @@ Tests were created for individual method calls, and combined method calls.
 
 - There is a floating global method called ‘check_file()’. It doesn’t do what its name indicates anyway - it checks program arguments.
   - Yes, and no. It checks the program argument to see if the specified file is of the right filetype.
-  - **Agreed** regarding inappropriateness of global method. Refactored into a CheckInput class, which separates the two checks (right number of arguments, right filetype extension)
+  - **Agreed** regarding inappropriateness of global method. Refactored into a InputValidator class, which separates the two checks (right number of arguments, right filetype extension)
 
 - The command line processing is inside the Bulldozer. This is an avoidable complication for the Bulldozer. There is a missing abstraction for input command parsing.
   - **Agreed**. To update and abstract command processing
@@ -190,11 +192,11 @@ Tests were created for individual method calls, and combined method calls.
 
 - There is no class for the direction, leading to the Bulldozer having logic for direction changes. Directions are stored as strings causing unnecessary duplication and use of memory - even if you accepted that a text form for this was OK, a symbol (equivalent of an internalised string in Java) would be used idiomatic Ruby.
   - **Agreed**. Swapping to symbols is an improvement.
-  - At this scale, abstracting directions to a seperate class feels over engineered. In this instance, ease of readibility outweighs performance benefits in my view.
+  - At this scale, abstracting directions to a separate class feels over engineered. In this instance, ease of readibility outweighs performance benefits in my view.
 
 - Command processing in the Bulldozer returns loosely structured data from its command processing. It is attempting to indicate multiple different things so it returns an array instead of a scalar or more structured object. Sometimes it only returns an array by coincidence (e.g. a string), so the caller that indexes into the array seems to work by accident. There is no direct unit test of this code.
   - **Agreed**. Returning an object seems a more appropriate strategy
   - Unit testing established for Command class.
 
 - The Bulldozer has a method for reporting all costs - that seems like an odd responsibility for a bulldozer.
-  - **Agreed**. Abstracted method back into the Cost class and called by a report trigger from Output class.
+  - **Agreed**. Abstracted method back into the Cost class and called by a report trigger from Report class.
