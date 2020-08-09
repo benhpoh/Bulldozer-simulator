@@ -42,9 +42,9 @@ An attempt to move beyond the boundaries of the site will end the simulation eve
 uncleared land.
 
 ## Assumption
-If a command results in the simulation ending (eg: advance 4 results in removal of protected tree / exiting site), the entire command is disregarded. Costs will be calculated up to the last valid command.
+If a command results in the simulation ending, the command is run up to the point where the next advance step is illegal. (eg: if advance 4 results in removal of a protected tree / exiting site on the 4th square, the first 3 legal squares will still be cleared)
 
-Penalty rate of 10 credits (destruction of protected tree) will still apply even though the command is disregarded.
+Penalty rate of 10 credits (destruction of protected tree) will not be applied because the Bulldozer is halted before the tree is destroyed.
 
 [Back to top](https://github.com/benhpoh/Bulldozer-simulator#bulldozer-simulator)
 
