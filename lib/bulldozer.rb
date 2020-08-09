@@ -1,16 +1,15 @@
 require_relative "map"
+require_relative "position"
 
 class Bulldozer
 
   def initialize(map_array)
-    @position_x = 0
-    @position_y = 1
-    @facing = :East
+    @position = Position.new
     @map = Map.new(map_array)
   end
 
   def location()
-    "X - #{@position_x}; Y - #{@position_y}; Facing - #{@facing}"
+    "X - #{@position.x}; Y - #{@position.y}; Facing - #{@position.facing}"
   end
 
   def map()
@@ -27,13 +26,11 @@ class Bulldozer
   end
 
   def left()
-    direction = [:South, :West, :North, :East]
-    @facing = direction[direction.index(@facing) - 1]
+    @position.rotate_left
   end
   
   def right()
-    direction = [:East, :North, :West, :South]
-    @facing = direction[direction.index(@facing) - 1]
+    @position.rotate_right
   end
 
   def advance(distance)
@@ -41,12 +38,9 @@ class Bulldozer
     distance = distance.to_i
 
     distance.times do
-      @facing == :East ? @position_x += 1 : nil
-      @facing == :West ? @position_x -= 1 : nil
-      @facing == :North ? @position_y -= 1 : nil
-      @facing == :South ? @position_y += 1 : nil
+      @position.advance
 
-      square_cleared = @map.clear(@position_x, @position_y)
+      square_cleared = @map.clear(@position.x, @position.y)
 
       if square_cleared.clearable?
         path_travelled << square_cleared
@@ -54,7 +48,6 @@ class Bulldozer
         @map.log_route(path_travelled)
         return {advance_successful: false, error_code: square_cleared.symbol}
       end
-
     end
 
     @map.log_route(path_travelled)

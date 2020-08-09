@@ -68,7 +68,8 @@ Penalty rate of 10 credits (destruction of protected tree) will still apply even
 - Report class completed. Reporting sections from Main abstracted into Report
 - Fixed mistake where portions of cost calculation remained in Report class
 - Renamed Output class to Report for better specificity.
-- Renamed CheckInput class to InputValidator to conform to naming conventions (nouns over verbs)
+- Renamed CheckInput class to InputValidator to conform to naming conventions (nouns over verbs).
+- Added a Position class to abtract logic of changing direction and XY coordinates off from Bulldozer.
 
 [Back to top](https://github.com/benhpoh/Bulldozer-simulator#bulldozer-simulator)
 
@@ -192,7 +193,7 @@ Tests were created for individual method calls, and combined method calls.
 
 - There is no class for the direction, leading to the Bulldozer having logic for direction changes. Directions are stored as strings causing unnecessary duplication and use of memory - even if you accepted that a text form for this was OK, a symbol (equivalent of an internalised string in Java) would be used idiomatic Ruby.
   - **Agreed**. Swapping to symbols is an improvement.
-  - At this scale, abstracting directions to a separate class feels over engineered. In this instance, ease of readibility outweighs performance benefits in my view.
+  - Position logic abstracted to a separate class to encapsulate both XY coordinates and direction. Bulldozer simply calls the appropriate method from Position class for swapping directions and advancing.
 
 - Command processing in the Bulldozer returns loosely structured data from its command processing. It is attempting to indicate multiple different things so it returns an array instead of a scalar or more structured object. Sometimes it only returns an array by coincidence (e.g. a string), so the caller that indexes into the array seems to work by accident. There is no direct unit test of this code.
   - **Agreed**. Returning an object seems a more appropriate strategy
